@@ -1,0 +1,130 @@
+---
+const navLinks = [
+  { label: 'Partenaires', href: '/partenaires' },
+  { label: 'Parrainage', href: '/parrainage' },
+  { label: 'Nos tarifs', href: '/tarifs' },
+  { label: 'Espace client', href: '/espace-client' },
+  { label: 'À vos côtés', href: '/a-vos-cotes' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="gradient-bg backdrop-blur-md bg-opacity-95">
+    <div class="container-custom">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2 group">
+          <svg class="w-8 h-8 md:w-10 md:h-10" viewBox="0 0 40 40" fill="none">
+            <path d="M8 28C8 28 12 12 16 12C20 12 18 24 20 24C22 24 20 12 24 12C28 12 32 28 32 28"
+                  stroke="#2196F3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="text-white font-display font-bold text-lg md:text-xl tracking-tight">
+            Med<span class="text-med-blue">emprunt</span>
+          </span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex items-center gap-1">
+          {navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'px-3 xl:px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200',
+                currentPath === link.href || currentPath === link.href + '/'
+                  ? 'text-white bg-white/15'
+                  : 'text-gray-300 hover:text-white hover:bg-white/10',
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <!-- CTA + Mobile toggle -->
+        <div class="flex items-center gap-3">
+          <a
+            href="/contact"
+            class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-med-blue text-white text-sm font-semibold
+                   rounded-xl transition-all duration-300 hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30"
+          >
+            RDV VISIO GRATUIT
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+          </a>
+
+          <!-- Mobile hamburger -->
+          <button
+            id="mobile-menu-btn"
+            class="lg:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+            aria-label="Menu"
+          >
+            <svg id="hamburger-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="lg:hidden hidden">
+    <div class="gradient-bg border-t border-white/10 px-4 pb-6 pt-2">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'block px-4 py-3 text-sm font-medium rounded-lg transition-colors',
+            currentPath === link.href || currentPath === link.href + '/'
+              ? 'text-white bg-white/15'
+              : 'text-gray-300 hover:text-white hover:bg-white/10',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="/contact"
+        class="mt-4 flex items-center justify-center gap-2 px-5 py-3 bg-med-blue text-white text-sm font-semibold
+               rounded-xl transition-all duration-300 hover:bg-blue-600"
+      >
+        RDV VISIO GRATUIT
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Spacer -->
+<div class="h-16 md:h-20"></div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const hamburger = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+    hamburger?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+
+  // Header background on scroll
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('shadow-xl');
+    } else {
+      header?.classList.remove('shadow-xl');
+    }
+  });
+</script>
