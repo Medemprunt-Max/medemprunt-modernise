@@ -63,6 +63,7 @@ export default {
         'slide-in-right': 'slideInRight 0.7s ease-out forwards',
         'float': 'float 6s ease-in-out infinite',
         'pulse-soft': 'pulseSoft 4s ease-in-out infinite',
+        'count-up': 'countUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
       },
       keyframes: {
         fadeIn: {
@@ -88,6 +89,10 @@ export default {
         pulseSoft: {
           '0%, 100%': { opacity: '0.4' },
           '50%': { opacity: '0.7' },
+        },
+        countUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
     },

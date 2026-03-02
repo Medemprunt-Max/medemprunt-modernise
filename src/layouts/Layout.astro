@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   canonicalPath?: string;
   ogImage?: string;
+  headerVariant?: 'dark' | 'light';
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   description = "MedEmprunt - Courtier en crédit immobilier spécialisé pour les professions médicales",
   canonicalPath,
   ogImage = "/og-image.jpg",
+  headerVariant = 'dark',
 } = Astro.props;
 
 const siteUrl = "https://www.medemprunt.fr";
@@ -78,7 +80,7 @@ const fullTitle = `${title} | MedEmprunt`;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body class="min-h-screen flex flex-col">
-    <Header />
+    <Header variant={headerVariant} />
     <main class="flex-1">
       <slot />
     </main>
