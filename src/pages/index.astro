@@ -23,7 +23,7 @@ const stats = [
   { value: '500', suffix: '+', label: 'Dossiers accompagnés' },
   { value: '0', suffix: '€', label: 'Frais de dossier' },
   { value: '98', suffix: '%', label: 'Taux de satisfaction' },
-  { value: '6j', suffix: '/7', label: 'Disponibilité' },
+  { value: '6', suffix: 'j/7', label: 'Disponibilité' },
 ];
 
 const services = [
@@ -350,8 +350,10 @@ const engagements = [
 
           if (!isNaN(targetNum) && targetNum > 0) {
             animateValue(htmlEl, targetNum, suffix);
+          } else {
+            // For "0€" — display static value immediately
+            htmlEl.textContent = targetStr + suffix;
           }
-          // For "0€" and "6j/7", just show the value directly (no animation needed)
         });
         statsObserver.unobserve(entry.target);
       }
