@@ -26,6 +26,14 @@ const stats = [
   { value: '6', suffix: 'j/7', label: 'Disponibilité' },
 ];
 
+/* Grid size mapping — uses static Tailwind classes so they survive CSS purging */
+const gridSizeMap: Record<string, string> = {
+  lg: 'md:col-span-7 md:row-span-2',
+  md: 'md:col-span-5',
+  sm: 'md:col-span-5',
+  wide: 'md:col-span-12',
+};
+
 const services = [
   {
     title: 'Résidence principale',
@@ -200,11 +208,11 @@ const engagements = [
       highlight="sur mesure"
       subtitle="Des financements adaptés à chaque étape de votre carrière médicale."
     />
-    <div class="bento-grid">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
       {services.map((s) => (
         <div class:list={[
-          'bento-item reveal',
-          `bento-item-${s.size}`,
+          'bg-white rounded-2xl shadow-soft p-6 md:p-8 card-hover flex flex-col justify-between relative reveal',
+          gridSizeMap[s.size] || '',
           s.accent && 'bento-item-accent',
         ]}>
           <div>
