@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # Netlify
 .netlify/
+
+# personal working notes (not site files)
+prompts/
+prompt-*.md
