@@ -13,6 +13,3 @@
 /rdv/                  /rdv                301
 /prendre-rendez-vous/  /rdv                301
 /simulateur/           /simulation         301
-
-# Catch-all trailing slashes
-/*/                    /:splat             301
